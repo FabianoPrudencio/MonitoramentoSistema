@@ -60,7 +60,10 @@ namespace MonitoramentoSistema
             UpdateMemoryUsage();
             UpdateDiskUsage();            
 
-            if (IsInternetAvailable())
+            string connectionType = TipoConexao();
+            LBconnect.Text = connectionType;
+
+            if (InternetValida())
             {
                 LBinterntetin.Text = "Conectado à Internet.";
             }
@@ -73,12 +76,9 @@ namespace MonitoramentoSistema
         private void Form1_Load(object sender, EventArgs e)
         {
             timer1.Start();
-
-            string connectionType = GetConnectionType();
-            LBconnect.Text = connectionType;
         }
 
-        public bool IsInternetAvailable()
+        public bool InternetValida()
         {
             try
             {
@@ -96,7 +96,7 @@ namespace MonitoramentoSistema
             }
         }
 
-        public string GetConnectionType()
+        public string TipoConexao()
         {
             // Obtém todas as interfaces de rede disponíveis no sistema
             var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
