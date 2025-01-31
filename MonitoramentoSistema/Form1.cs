@@ -19,10 +19,7 @@ namespace MonitoramentoSistema
     {
         private PerformanceCounter cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
 
-        private PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-
-        private PerformanceCounter networkCounterIn = new PerformanceCounter("Network Interface", "Bytes Received/sec", "Ethernet");
-        private PerformanceCounter networkCounterOut = new PerformanceCounter("Network Interface", "Bytes Sent/sec", "Ethernet");
+        private PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");       
                 
         public Form1()
         {
@@ -61,15 +58,7 @@ namespace MonitoramentoSistema
         {
             UpdateCPUUsage();
             UpdateMemoryUsage();
-            UpdateDiskUsage();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            timer1.Start();
-
-            string connectionType = GetConnectionType();
-            LBconnect.Text = connectionType;
+            UpdateDiskUsage();            
 
             if (IsInternetAvailable())
             {
@@ -79,6 +68,14 @@ namespace MonitoramentoSistema
             {
                 LBinterntetin.Text = "Não está conectado à Internet.";
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            timer1.Start();
+
+            string connectionType = GetConnectionType();
+            LBconnect.Text = connectionType;
         }
 
         public bool IsInternetAvailable()
